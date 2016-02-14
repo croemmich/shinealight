@@ -1,6 +1,6 @@
 {
-  "css/app.css": "css/app.d18a7bd5.css",
-  "css/app.css.map": "css/app.css.fcd0ff4c.map",
+  "css/app.css": "css/app.1f969532.css",
+  "css/app.css.map": "css/app.css.624bf583.map",
   "fonts/FontAwesome.otf": "fonts/FontAwesome.7d410525.otf",
   "fonts/fontawesome-webfont.eot": "fonts/fontawesome-webfont.a86ff59c.eot",
   "fonts/fontawesome-webfont.svg": "fonts/fontawesome-webfont.f775f9cc.svg",
@@ -12,10 +12,11 @@
   "fonts/glyphicons-halflings-regular.ttf": "fonts/glyphicons-halflings-regular.a31955de.ttf",
   "fonts/glyphicons-halflings-regular.woff": "fonts/glyphicons-halflings-regular.85df732e.woff",
   "fonts/glyphicons-halflings-regular.woff2": "fonts/glyphicons-halflings-regular.5e8b1222.woff2",
+  "img/bg.jpg": "img/bg.ff47d7b5.jpg",
   "img/favicon.ico": "img/favicon.ca203706.ico",
   "img/logo.png": "img/logo.b6945698.png",
-  "js/app.js": "js/app.355a598b.js",
-  "js/app.js.map": "js/app.js.58efd5fb.map",
-  "js/vendor.js": "js/vendor.2b3e10c3.js",
-  "js/vendor.js.map": "js/vendor.js.2936cde0.map"
+  "js/app.js": "js/app.de3c94ae.js",
+  "js/app.js.map": "js/app.js.1350691f.map",
+  "js/vendor.js": "js/vendor.7a0ac467.js",
+  "js/vendor.js.map": "js/vendor.js.a30745d9.map"
 }

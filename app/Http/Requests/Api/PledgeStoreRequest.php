@@ -8,7 +8,8 @@ class PledgeStoreRequest extends ApiRequest {
     return [
       'name' => 'required',
       'latitude' => 'required|numeric|between:-90,90',
-      'longitude' => 'required|numeric|between:-180,180'
+      'longitude' => 'required|numeric|between:-180,180',
+      'comment' => 'required'
     ];
   }
 

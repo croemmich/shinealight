@@ -35,8 +35,13 @@ return [
     'secret' => env('STRIPE_SECRET'),
   ],
 
-  'analytics' => [
-    'code' => env('ANALYTICS_CODE')
-  ]
+  'google' => [
+    'analytics' => [
+      'code' => env('GOOGLE_ANALYTICS_CODE')
+    ],
+    'maps' => [
+      'key' => env('GOOGLE_MAPS_KEY')
+    ]
+  ],
 
 ];

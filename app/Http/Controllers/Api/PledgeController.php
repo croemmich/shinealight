@@ -7,11 +7,11 @@ class PledgeController extends ApiController {
 
   public function index() {
     return Pledge::query()
-      ->whereNull('hidden_at')
-      ->whereNotNull('latitude')
-      ->whereNotNull('longitude')
-      ->orderBy('updated_at', 'desc')
-      ->get(['id', 'name', 'comment', 'latitude', 'longitude', 'updated_at']);
+                 ->whereNull('hidden_at')
+                 ->whereNotNull('latitude')
+                 ->whereNotNull('longitude')
+                 ->orderBy('updated_at', 'desc')
+                 ->get(['id', 'name', 'comment', 'latitude', 'longitude', 'updated_at']);
   }
 
   public function store(PledgeStoreRequest $request) {

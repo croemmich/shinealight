@@ -5,7 +5,7 @@ var imagemin = require('gulp-imagemin');
 var rev = require('gulp-rev-all');
 var del = require('del');
 
-elixir.config.production = true;
+elixir.config.production = false;
 
 /*
  |--------------------------------------------------------------------------
@@ -18,13 +18,19 @@ elixir.config.production = true;
  |
  */
 
+var bowerDir = './vendor/bower_components/';
+
 var paths = {
-    'bower': './vendor/bower_components/',
-    'bootstrap': './vendor/bower_components/bootstrap/',
-    'fontawesome': './vendor/bower_components/font-awesome/',
-    'jquery': './vendor/bower_components/jquery/',
-    'jstz': './vendor/bower_components/jstzdetect/',
-    'pusher': './vendor/bower_components/pusher/'
+    'bootstrap': bowerDir + 'bootstrap/',
+    'fontawesome': bowerDir + 'font-awesome/',
+    'jquery': bowerDir + 'jquery/',
+    'jquery_backstretch': bowerDir + 'jquery-backstretch/',
+    'jquery_easing': bowerDir + 'jquery.easing/',
+    'jstz': bowerDir + 'jstzdetect/',
+    'pusher': bowerDir +'pusher/',
+    'textillate': bowerDir + 'textillate/',
+    'toastr': bowerDir + 'toastr/',
+    'velocity': bowerDir + 'velocity/'
 };
 
 var assets = './resources/assets/';
@@ -55,7 +61,7 @@ elixir(function (mix) {
 
     // Compile LESS
     mix.less('_boot.less', 'build/css/app.css', {
-        paths: ['.', paths.bower]
+        paths: ['.', bowerDir]
     });
 
     // Copy fonts
@@ -64,7 +70,7 @@ elixir(function (mix) {
 
     // Concatenate vendor scripts
     mix.scripts([
-        paths.jquery + "dist/jquery.min.js",
+        paths.jquery + "jquery.min.js",
         paths.bootstrap + "js/alert.js",
         paths.bootstrap + "js/button.js",
         paths.bootstrap + "js/collapse.js",
@@ -75,7 +81,13 @@ elixir(function (mix) {
         paths.bootstrap + "js/tab.js",
         paths.bootstrap + "js/transition.js",
         paths.jstz + "jstz.min.js",
-        paths.pusher + "dist/pusher.min.js"
+        paths.pusher + "dist/pusher.min.js",
+        paths.toastr + "toastr.min.js",
+        paths.jquery_backstretch + "jquery.backstretch.min.js",
+        paths.jquery_easing + "js/jquery.easing.min.js",
+        paths.velocity + "velocity.min.js",
+        paths.textillate + "assets/jquery.lettering.js",
+        paths.textillate + "jquery.textillate.js"
     ], 'build/js/vendor.js', './');
 
     // Concatenate app scripts
