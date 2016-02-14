@@ -12,6 +12,7 @@
     <script type="text/javascript">
         window.csrfToken = '{{ csrf_token() }}';
         window.apiBase = '{{ url('/api') }}';
+        window.pusherKey = '{{ config('broadcasting.connections.pusher.key') }}'
     </script>
     @yield('styles','')
 </head>
@@ -41,14 +42,14 @@
     </div>
 </header>
 <footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 col-sm-push-6 lj-footer-copyrights">
-                <p>&copy; All rights reserved. <a href="http://themeforest.net/user/lumberjacks?ref=lumberjacks"
-                                                  target="_blank">Lumberjacks 2015</a></p>
-            </div>
-        </div>
-    </div>
+    {{--<div class="container">--}}
+        {{--<div class="row">--}}
+            {{--<div class="col-sm-6 col-sm-push-6 lj-footer-copyrights">--}}
+                {{--<p>&copy; All rights reserved. <a href="http://themeforest.net/user/lumberjacks?ref=lumberjacks"--}}
+                                                  {{--target="_blank">Lumberjacks 2015</a></p>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
 </footer>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.maps.key') }}&libraries=places"
         defer></script>

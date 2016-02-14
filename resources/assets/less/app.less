@@ -54,9 +54,9 @@ body {
 
   p {
     margin-top: 40px;
-    font-size: 1.4em;
-    font-weight: 400;
-    font-style: italic;
+    font-size: 1.2em;
+    font-weight: 300;
+    font-style: normal;
     line-height: 1.5em;
   }
 
@@ -126,7 +126,7 @@ header {
 
   > .container {
     height: 100%;
-    padding: 100px 20px 150px;
+    padding: 100px 20px 50px;
     position: relative;
     z-index: 1;
   }
@@ -169,7 +169,6 @@ header {
 
 .lj-socials {
   text-align: right;
-  margin-bottom: 50px;
   z-index: 3;
 }
 
@@ -245,14 +244,23 @@ header {
   }
 
   .lj-title-paragraph {
-    max-width: 600px;
+    max-width: 700px;
   }
 
   .lj-title-paragraph p {
     font-size: 1.4em;
-    font-style: italic;
+    font-style: normal;
+    font-weight: 300;
   }
 
+}
+
+#map {
+  #map-container {
+    margin-top:1.5em;
+    width: 100%;
+    height: 600px;
+  }
 }
 
 #pledge {
@@ -354,12 +362,12 @@ header {
 .pac-container {
   color: #dedede;
   background: rgba(0, 0, 0, 0.75);
-  //&:after {
-  //  // replace the google logo with text
-  //  background-image: none !important;
-  //  content: "Powered by Google";
-  //  font-size: 10px;
-  //}
+  &:after {
+    // replace the google logo with text
+    background-image: none !important;
+    content: "Powered by Google";
+    font-size: 10px;
+  }
 }
 
 .pac-item {
@@ -405,6 +413,17 @@ footer {
   }
 }
 
+@media (max-width: 1300px) {
+  #home {
+    .lj-title-paragraph {
+      max-width: 600px;
+      p {
+        font-size: 1.2em
+      }
+    }
+  };
+}
+
 @media (max-width: 767px) {
 
   body {
@@ -434,9 +453,12 @@ footer {
       font-size: 2em;
       margin-top: 0;
     }
-
-    .lj-title-paragraph p {
-      font-size: 1.2em
+    .lj-title-paragraph {
+      max-width: 600px;
+      p {
+        background: rgba(0, 0, 0, 0.3);
+        font-size: 1.2em
+      }
     }
   }
 

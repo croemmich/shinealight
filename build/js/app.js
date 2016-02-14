@@ -13,6 +13,14 @@ jQuery(document).ready(function ($) {
 
   setTimezoneCookie(jstz.determine().name());
 
+
+  Pusher.log = function(message) {
+    if (window.console && window.console.log) {
+      window.console.log(message);
+    }
+  };
+  var pusher = new Pusher(window.pusherKey, {encrypted: true});
+
   /**
    * Scroll page to top on refresh
    */
@@ -106,9 +114,8 @@ jQuery(document).ready(function ($) {
   function onDisplaySlide(selector, root) {
     if (selector == "#pledge") {
       setupPledgeSlide(root);
-    }
-    if (selector == "#map") {
-      setupMapSlide(root)
+    } else if (selector == "#map") {
+      setupMapSlide(root);
     }
   }
 
@@ -383,6 +390,9 @@ jQuery(document).ready(function ($) {
   }
 
   var mapSlideElement = false;
+  var mapMap;
+  var mapMarkerCluster;
+  var mapInfoWindow;
 
   /**
    * Sets up bindings on the map slide
@@ -390,37 +400,95 @@ jQuery(document).ready(function ($) {
    * @returns {boolean}
    */
   function setupMapSlide(root) {
-    if (mapSlideElement) return;
-    mapSlideElement = root;
+    if (!mapSlideElement) {
+      mapSlideElement = root;
 
-    var center = new google.maps.LatLng(46.8541765, -96.8985526);
-    var options = {
-      'zoom': 13,
-      'center': center,
-      'mapTypeId': google.maps.MapTypeId.HYBRID
-    };
+      var center = new google.maps.LatLng(46.8541765, -96.8985526);
+      var options = {
+        'zoom': 12,
+        'center': center,
+        'mapTypeId': google.maps.MapTypeId.HYBRID
+      };
 
-    var map = new google.maps.Map(mapSlideElement.find('#map-container')[0], options);
+      mapMap = new google.maps.Map(mapSlideElement.find('#map-container')[0], options);
+      mapMarkerCluster = new MarkerClusterer(mapMap, [], {
+        maxZoom: 14,
+        gridSize: 50
+      });
 
-    var markers = [];
-    //for (var i = 0; i < 100; i++) {
-    //  var latLng = new google.maps.LatLng(data.photos[i].latitude,
-    //    data.photos[i].longitude);
-    //  var marker = new google.maps.Marker({'position': latLng});
-    //  markers.push(marker);
-    //}
-    var markerCluster = new MarkerClusterer(map, markers);
+      mapInfoWindow = new google.maps.InfoWindow();
+    }
 
-    // send the request
-    //$.ajax({
-    //  type: "POST",
-    //  url: window.apiBase + '/pledge',
-    //  data: data,
-    //  success: onPostPledgeSuccess,
-    //  error: onPostPledgeError
-    //});
-
-    return true;
+    subscribeForMarkerUpdates();
+    loadMarkers();
   }
+
+  var mapGettingMarkers = false;
+
+  /**
+   * Load the initial map markers
+   */
+  function loadMarkers() {
+    if (!mapGettingMarkers && mapMarkerCluster.getTotalMarkers() <= 0) {
+      mapGettingMarkers = true;
+      $.ajax({
+        type: "GET",
+        url: window.apiBase + '/pledge',
+        success: function (data, textStatus, jqXHR) {
+          var markers = [];
+          for (var i in data) {
+            var pledge = data[i];
+            var marker = createMarkerFromPledge(pledge);
+            markers.push(marker);
+          }
+          mapMarkerCluster.addMarkers(markers);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          toastr.error('Failed to load map markers. Please try again later. ' + textStatus);
+        },
+        complete: function() {
+          mapGettingMarkers = false;
+        }
+      });
+    }
+  }
+
+  var subscribedForMarkerUpdates = false;
+  function subscribeForMarkerUpdates() {
+    if (subscribedForMarkerUpdates) return;
+    subscribedForMarkerUpdates = true;
+    var channel = pusher.subscribe('pledges');
+    channel.bind('App\\Events\\NewPledgeEvent', function(data) {
+      var marker = createMarkerFromPledge(data.pledge);
+      mapMarkerCluster.addMarker(marker);
+      toastr.info(data.pledge.comment, data.pledge.name + ' just made a pledge!')
+    });
+  }
+
+  function createMarkerFromPledge(pledge) {
+    var latLng = new google.maps.LatLng(pledge.latitude, pledge.longitude);
+    var marker = new google.maps.Marker({'position': latLng});
+    google.maps.event.addListener(marker, 'click', markerClickFunction(pledge, latLng));
+    return marker;
+  }
+
+
+  function markerClickFunction(pledge, latlng) {
+    return function(e) {
+      e.cancelBubble = true;
+      e.returnValue = false;
+      if (e.stopPropagation) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+      var infoHtml = '<div class="info" style="color: black;"><h4>' + pledge.name +
+          '</h4><div class="info-body">'+pledge.comment+'</div></div>';
+
+      mapInfoWindow.setContent(infoHtml);
+      mapInfoWindow.setPosition(latlng);
+      mapInfoWindow.open(mapMap);
+    };
+  }
+
 });
 //# sourceMappingURL=app.js.map
