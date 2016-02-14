@@ -29,3 +29,7 @@ Route::get('/', function() {
 Route::group(['middleware' => ['web']], function() {
   //
 });
+
+Route::group(['prefix' => 'api', 'namespace'=>'Api', 'middleware' => ['api']], function() {
+  Route::resource('pledge', 'PledgeController', ['only' => ['index', 'store']]);
+});
