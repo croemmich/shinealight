@@ -23,6 +23,7 @@ var bowerDir = './vendor/bower_components/';
 var paths = {
     'bootstrap': bowerDir + 'bootstrap/',
     'fontawesome': bowerDir + 'font-awesome/',
+    'js_marker_clusterer': bowerDir + 'js-marker-clusterer/',
     'jquery': bowerDir + 'jquery/',
     'jquery_backstretch': bowerDir + 'jquery-backstretch/',
     'jquery_easing': bowerDir + 'jquery.easing/',
@@ -80,6 +81,7 @@ elixir(function (mix) {
         paths.bootstrap + "js/popover.js",
         paths.bootstrap + "js/tab.js",
         paths.bootstrap + "js/transition.js",
+        paths.js_marker_clusterer + "src/markerclusterer_compiled.js",
         paths.jstz + "jstz.min.js",
         paths.pusher + "dist/pusher.min.js",
         paths.toastr + "toastr.min.js",

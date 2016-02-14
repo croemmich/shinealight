@@ -382,7 +382,7 @@ jQuery(document).ready(function ($) {
     }
   }
 
-  var haveSetupMapSlide = false;
+  var mapSlideElement = false;
 
   /**
    * Sets up bindings on the map slide
@@ -390,8 +390,35 @@ jQuery(document).ready(function ($) {
    * @returns {boolean}
    */
   function setupMapSlide(root) {
-    if (haveSetupMapSlide) return;
-    haveSetupMapSlide = true;
+    if (mapSlideElement) return;
+    mapSlideElement = root;
+
+    var center = new google.maps.LatLng(46.8541765, -96.8985526);
+    var options = {
+      'zoom': 13,
+      'center': center,
+      'mapTypeId': google.maps.MapTypeId.HYBRID
+    };
+
+    var map = new google.maps.Map(mapSlideElement.find('#map-container')[0], options);
+
+    var markers = [];
+    //for (var i = 0; i < 100; i++) {
+    //  var latLng = new google.maps.LatLng(data.photos[i].latitude,
+    //    data.photos[i].longitude);
+    //  var marker = new google.maps.Marker({'position': latLng});
+    //  markers.push(marker);
+    //}
+    var markerCluster = new MarkerClusterer(map, markers);
+
+    // send the request
+    //$.ajax({
+    //  type: "POST",
+    //  url: window.apiBase + '/pledge',
+    //  data: data,
+    //  success: onPostPledgeSuccess,
+    //  error: onPostPledgeError
+    //});
 
     return true;
   }
