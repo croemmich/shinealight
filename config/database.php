@@ -54,7 +54,12 @@ return [
 
     'mysql' => [
       'driver' => 'mysql',
-      'host' => env('DB_HOST', 'localhost'),
+      'read' => [
+        'host' => env('DB_HOST_READ', env('DB_HOST', 'mysqlr')),
+      ],
+      'write' => [
+        'host' => env('DB_HOST_WRITE', env('DB_HOST', 'mysqlw')),
+      ],
       'database' => env('DB_DATABASE', 'forge'),
       'username' => env('DB_USERNAME', 'forge'),
       'password' => env('DB_PASSWORD', ''),
@@ -62,7 +67,7 @@ return [
       'collation' => 'utf8_unicode_ci',
       'prefix' => '',
       'strict' => false,
-      'engine' => null,
+      'engine' => 'InnoDB',
     ],
 
     'pgsql' => [
@@ -117,10 +122,10 @@ return [
     'cluster' => false,
 
     'default' => [
-      'host' => env('REDIS_HOST', 'localhost'),
-      'password' => env('REDIS_PASSWORD', null),
-      'port' => env('REDIS_PORT', 6379),
-      'database' => 0,
+      'host' => env('REDIS_HOST', 'redis'),
+      'port' => intval(env('REDIS_PORT', 6379)),
+      'database' => intval(env('REDIS_DATABASE', 0)),
+      'password' => env('REDIS_PASSWORD', null)
     ],
 
   ],

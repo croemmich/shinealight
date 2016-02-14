@@ -16,7 +16,7 @@ return [
   |
   */
 
-  'driver' => env('SESSION_DRIVER', 'file'),
+  'driver' => env('SESSION_DRIVER', 'redis'),
 
   /*
   |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ return [
   |
   */
 
-  'lifetime' => 120,
+  'lifetime' => 60,
 
   'expire_on_close' => false,
 
@@ -44,7 +44,7 @@ return [
   |
   */
 
-  'encrypt' => false,
+  'encrypt' => env('SESSION_ENCRYPT', true),
 
   /*
   |--------------------------------------------------------------------------
@@ -109,7 +109,7 @@ return [
   |
   */
 
-  'cookie' => 'laravel_session',
+  'cookie' => env('SESSION_COOKIE', container_name() . '_session'),
 
   /*
   |--------------------------------------------------------------------------
@@ -148,6 +148,6 @@ return [
   |
   */
 
-  'secure' => false,
+  'secure' => env('SESSION_SECURE', true),
 
 ];

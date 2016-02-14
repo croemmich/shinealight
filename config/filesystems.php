@@ -15,7 +15,7 @@ return [
   |
   */
 
-  'default' => 'local',
+  'default' => env('FS_DEFAULT', 'local'),
 
   /*
   |--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return [
   |
   */
 
-  'cloud' => 's3',
+  'cloud' => env('FS_CLOUD', 's3'),
 
   /*
   |--------------------------------------------------------------------------
@@ -56,10 +56,10 @@ return [
 
     's3' => [
       'driver' => 's3',
-      'key' => 'your-key',
-      'secret' => 'your-secret',
-      'region' => 'your-region',
-      'bucket' => 'your-bucket',
+      'key' => env('FS_S3_KEY', 'your-key'),
+      'secret' => env('FS_S3_SECRET', 'your-secret'),
+      'region' => env('FS_S3_REGION', 'your-region'),
+      'bucket' => env('FS_S3_BUCKET', 'your-bucket'),
     ],
 
   ],

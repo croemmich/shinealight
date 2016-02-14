@@ -54,7 +54,10 @@ return [
   |
   */
 
-  'from' => ['address' => null, 'name' => null],
+  'from' => [
+    'address' => env('MAIL_FROM_ADDRESS', container_name() . '@localhost'),
+    'name' => env('MAIL_FROM_NAME', ucfirst(container_name()))
+  ],
 
   /*
   |--------------------------------------------------------------------------

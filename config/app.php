@@ -39,7 +39,7 @@ return [
   |
   */
 
-  'url' => 'http://localhost',
+  'url' => env('APP_URL', 'https://shinealight.us'),
 
   /*
   |--------------------------------------------------------------------------
@@ -108,7 +108,7 @@ return [
   |
   */
 
-  'log' => env('APP_LOG', 'single'),
+  'log' => env('APP_LOG', env('SUPERVISOR_ENABLED') ? 'syslog' : 'errorlog'),
 
   /*
   |--------------------------------------------------------------------------
@@ -155,6 +155,11 @@ return [
     App\Providers\AuthServiceProvider::class,
     App\Providers\EventServiceProvider::class,
     App\Providers\RouteServiceProvider::class,
+
+    /*
+     * Trusted Proxy
+     */
+    Fideloper\Proxy\TrustedProxyServiceProvider::class,
 
   ],
 
