@@ -12078,6 +12078,14 @@ header > canvas {
   top: 0;
   left: 0;
 }
+.lj-logo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4em;
+}
+.lg-num-pledges {
+  margin-left: 10px;
+  color: #ed5565;
+}
 .lj-overlay {
   width: 100%;
   height: 100%;
@@ -12348,4 +12356,4 @@ footer .lj-footer-copyrights p {
   }
 }
 
-/*# sourceMappingURL=app.css.90c3dda9.map */
+/*# sourceMappingURL=app.css.31790a05.map */

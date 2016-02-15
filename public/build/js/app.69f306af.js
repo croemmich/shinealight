@@ -19,7 +19,9 @@ jQuery(document).ready(function ($) {
       window.console.log(message);
     }
   };
+
   var pusher = new Pusher(window.pusherKey, {encrypted: true});
+  subscribeForMarkerUpdates();
 
   /**
    * Scroll page to top on refresh
@@ -410,7 +412,6 @@ jQuery(document).ready(function ($) {
       mapInfoWindow = new google.maps.InfoWindow();
     }
 
-    subscribeForMarkerUpdates();
     loadMarkers();
   }
 
@@ -451,12 +452,15 @@ jQuery(document).ready(function ($) {
     var channel = pusher.subscribe('pledges');
     channel.bind('App\\Events\\NewPledgeEvent', function(data) {
       var marker = createMarkerFromPledge(data.pledge);
-      mapMarkerCluster.addMarker(marker);
+      if (mapMarkerCluster) {
+        mapMarkerCluster.addMarker(marker);
+      }
       if (data.pledge.comment) {
         toastr.info(data.pledge.comment, data.pledge.name + ' just made a pledge!')
       } else {
         toastr.info(data.pledge.name + ' just made a pledge!')
       }
+      incrementNumberOfPledges()
     });
   }
 
@@ -488,5 +492,10 @@ jQuery(document).ready(function ($) {
     };
   }
 
+  function incrementNumberOfPledges() {
+    window.numPledges = window.numPledges + 1;
+    $('#num-pledges').text(window.numPledges);
+  }
+
 });
-//# sourceMappingURL=app.js.ab13ec7d.map
+//# sourceMappingURL=app.js.42ed908c.map

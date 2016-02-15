@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-  return view('app');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -27,7 +23,7 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-  //
+  Route::resource('/', 'MainController', ['only' => 'index']);
 });
 
 Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => ['api']], function () {

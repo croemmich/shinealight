@@ -12,7 +12,8 @@
     <script type="text/javascript">
         window.csrfToken = '{{ csrf_token() }}';
         window.apiBase = '{{ url('/api') }}';
-        window.pusherKey = '{{ config('broadcasting.connections.pusher.key') }}'
+        window.pusherKey = '{{ config('broadcasting.connections.pusher.key') }}';
+        window.numPledges = {{ $numPledges }};
     </script>
     @yield('styles','')
 </head>
@@ -26,7 +27,11 @@
     </nav>
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-sm-push-6 lj-socials">
+            <div class="col-sm-6 lj-logo">
+                <img src="{{ elixir('img/bluelight.png') }}" alt="blue light bulb logo">
+                <span id="num-pledges" class="lg-num-pledges">{{ $numPledges }}</span> pledges so far!
+            </div>
+            <div class="col-sm-6 lj-socials">
                 <ul>
                     <li><a class="fa fa-facebook" href="{{ config('social.facebook') }}"></a></li>
                     <li><a class="fa fa-twitter" href="{{ config('social.twitter') }}"></a></li>
