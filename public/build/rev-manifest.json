@@ -12,11 +12,11 @@
   "fonts/glyphicons-halflings-regular.ttf": "fonts/glyphicons-halflings-regular.a31955de.ttf",
   "fonts/glyphicons-halflings-regular.woff": "fonts/glyphicons-halflings-regular.85df732e.woff",
   "fonts/glyphicons-halflings-regular.woff2": "fonts/glyphicons-halflings-regular.5e8b1222.woff2",
+  "js/app.js": "js/app.a5505436.js",
+  "js/app.js.map": "js/app.js.ab13ec7d.map",
+  "js/vendor.js": "js/vendor.39539c25.js",
+  "js/vendor.js.map": "js/vendor.js.b3a2699e.map",
   "img/bg.jpg": "img/bg.ff47d7b5.jpg",
   "img/favicon.ico": "img/favicon.ca203706.ico",
-  "img/logo.png": "img/logo.b6945698.png",
-  "js/app.js": "js/app.c9789285.js",
-  "js/app.js.map": "js/app.js.afdc1f53.map",
-  "js/vendor.js": "js/vendor.39539c25.js",
-  "js/vendor.js.map": "js/vendor.js.b3a2699e.map"
+  "img/logo.png": "img/logo.b6945698.png"
 }

@@ -99,7 +99,7 @@ elixir(function (mix) {
 
     // Minify images
     mix.imagemin(elixir.config.assetsPath + '/img/**/*', 'build/img');
-    mix.imagemin(elixir.config.assetsPath + '/img/favicon.ico', 'public');
+    //mix.imagemin(elixir.config.assetsPath + '/img/favicon.ico', 'public');
 
     // Version everything
     mix.revision('build/**/*', 'public/build');

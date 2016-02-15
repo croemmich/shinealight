@@ -297,7 +297,7 @@ jQuery(document).ready(function ($) {
       allLabels.trigger('click');
       allFields.trigger('click');
 
-      if ($(this).find('.valid').length == 3) {
+      if ($(this).find('.valid').length == 2) {
         postPledge(root);
       }
     });
@@ -334,15 +334,6 @@ jQuery(document).ready(function ($) {
     // validate the address field
     root.find('input[name="address"]').on('change keyup paste click', function () {
       updatePlaceDataFromAddress();
-    });
-
-    // validate the comment field
-    root.find('textarea[name="comment"]').on('change keyup paste click', function () {
-      if (!$(this).val()) {
-        setPledgeFieldValidity($(this), false, "Required");
-      } else {
-        setPledgeFieldValidity($(this), true);
-      }
     });
   }
 
@@ -461,7 +452,11 @@ jQuery(document).ready(function ($) {
     channel.bind('App\\Events\\NewPledgeEvent', function(data) {
       var marker = createMarkerFromPledge(data.pledge);
       mapMarkerCluster.addMarker(marker);
-      toastr.info(data.pledge.comment, data.pledge.name + ' just made a pledge!')
+      if (data.pledge.comment) {
+        toastr.info(data.pledge.comment, data.pledge.name + ' just made a pledge!')
+      } else {
+        toastr.info(data.pledge.name + ' just made a pledge!')
+      }
     });
   }
 
@@ -481,14 +476,17 @@ jQuery(document).ready(function ($) {
         e.stopPropagation();
         e.preventDefault();
       }
-      var infoHtml = '<div class="info" style="color: black;"><h4>' + pledge.name +
-          '</h4><div class="info-body">'+pledge.comment+'</div></div>';
+      var html = '<div class="info" style="color: black;"><h4>' + pledge.name + '</h4>';
+      if (pledge.comment) {
+        html += '<div class="info-body">'+pledge.comment+'</div>'
+      }
+      html += '</div>';
 
-      mapInfoWindow.setContent(infoHtml);
+      mapInfoWindow.setContent(html);
       mapInfoWindow.setPosition(latlng);
       mapInfoWindow.open(mapMap);
     };
   }
 
 });
-//# sourceMappingURL=app.js.afdc1f53.map
+//# sourceMappingURL=app.js.ab13ec7d.map
